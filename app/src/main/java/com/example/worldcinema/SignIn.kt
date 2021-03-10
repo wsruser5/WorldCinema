@@ -37,9 +37,8 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
         } else {
             isCanPass = true }
 
-        btnInLogin.isEnabled = isCanEmailVeri
         btnInLogin.setOnClickListener {
-            startActivity(Intent(this,SignUp::class.java))
+            startActivity(Intent(this, MainScreen::class.java))
         }
         btnInReg.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)

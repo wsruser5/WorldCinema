@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,4 +7,58 @@
     tools:context=".MainScreen"
     android:background="@color/colorPrim">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:src="@drawable/imgav"
+                    android:scaleType="center" />
+
+                <Button
+                    android:id="@+id/btnMainView"
+                    android:layout_width="128dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Смотреть"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="292dp"/>
+
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                xmlns:tools="http://schemas.android.com/tools"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/category_container"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:background="#14c4c4c4"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                xmlns:tools="http://schemas.android.com/tools"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/items_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</FrameLayout>
