@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="55dp"
+    android:id="@+id/clrow"
+    android:background="#14c4c4c4">
+
+    <TextView
+        android:id="@+id/tvrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAcc"
+        android:text="В тренде"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"/>
+
+
+</androidx.cardview.widget.CardView>
