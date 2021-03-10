@@ -60,9 +60,6 @@ class SignUp : AppCompatActivity() {
         } else {
             isCanpassAgg = true }
 
-
-        btnUplogin.isEnabled = isCanEmailVer
-
         btnUplogin.setOnClickListener {
             startActivity(Intent(this, SignIn::class.java))
         }
