@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp"
+    android:background="@color/colorPrim">
+
+    <ImageView
+        android:layout_width="207dp"
+        android:layout_height="134dp"
+        android:src="@drawable/logo_and_text"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="44dp"/>
+
+
+
+
+    <EditText
+        android:id="@+id/etUpName"
+        android:layout_width="343dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_et"
+        android:hint="Имя"
+        android:textSize="14sp"
+        android:textColorHint="@color/colorBorder"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="242dp"
+        android:textColor="@color/colorBorder"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/etUpFam"
+        android:layout_width="343dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_et"
+        android:hint="Фамилия"
+        android:textSize="14sp"
+        android:textColorHint="@color/colorBorder"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="302dp"
+        android:textColor="@color/colorBorder"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/etUpEmail"
+        android:layout_width="343dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_et"
+        android:hint="E-mail"
+        android:textSize="14sp"
+        android:textColorHint="@color/colorBorder"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="362dp"
+        android:textColor="@color/colorBorder"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/etUpPass"
+        android:layout_width="343dp"
+        android:textSize="14sp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_et"
+        android:hint="Пароль"
+        android:textColorHint="@color/colorBorder"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="422dp"
+        android:textColor="@color/colorBorder"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/etUpPassAgg"
+        android:layout_width="343dp"
+        android:textSize="14sp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_et"
+        android:hint="Повторите пароль"
+        android:textColorHint="@color/colorBorder"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="482dp"
+        android:textColor="@color/colorBorder"
+        android:inputType="textPassword"/>
+
+
+
+
+    <Button
+        android:id="@+id/btnUplogin"
+        android:layout_width="343dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_btn"
+        android:text="Зарегистрироваться"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="586dp"/>
+
+    <Button
+        android:id="@+id/btnUpReg"
+        android:layout_width="343dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_et"
+        android:text="У меня уже есть аккаунт"
+        android:textSize="14sp"
+        android:textColor="@color/colorAcc"
+        android:textAllCaps="false"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="646dp"/>
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+</FrameLayout>
