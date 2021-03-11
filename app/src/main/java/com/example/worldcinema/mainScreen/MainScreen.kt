@@ -31,20 +31,23 @@ class MainScreen : AppCompatActivity() {
 
     private val myAdapter by lazy { MyAdapter() }
     private var url: String = ""
+    private var urlLast: String = ""
+    private var nameLast: String = ""
     private lateinit var films: List<MoviesListItem>
+    private var idCover: String = ""
+    private var idLast: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
-//        val movies = listOf(
-//            getPopularMovies("poster.jpg")
-//        )
+        ivMainLastVideo.setOnClickListener {  }
+        val token:String = intent.getStringExtra("token").toString()
         items_container.adapter = myAdapter
         items_container.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
 
         getMovies()
-
+        getLastVideo(token)
         getCover()
     }
 
@@ -62,7 +65,6 @@ class MainScreen : AppCompatActivity() {
                     movies.let{
                         myAdapter.setData(it)
                     }
-//                    items_container.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(movies(poster))
                     Log.d("testGif", movies.toString())
                     Toast.makeText(this, "Good", Toast.LENGTH_SHORT).show()
 
@@ -74,20 +76,52 @@ class MainScreen : AppCompatActivity() {
             )
     }
 
+    private fun getLastVideo(token:String) {
+        buildNewRetrofit().create(ApiRequest::class.java).getLastVideo("lastView").subscribeOn(
+            Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map {
+                urlLast = it[1].poster
+                nameLast = it[1].name
+                idLast = it[1].movieId
+            }.subscribeBy(
+                onNext = {
+                    Glide.with(this)
+                        .load(IMG_URL + urlLast)
+                        .into(ivMainLastVideo)
+                    tvMainLastVideoName.text = nameLast
+                    ivMainLastVideo.setOnClickListener {
+                        val intent = Intent(this, RecyclerItemScreen::class.java)
+                        intent.putExtra("FilmId", idLast)
+                        startActivity(intent)
+                    }
+                    Log.d("testGif", "LastVideo")
+                    Toast.makeText(this, "LastVideo", Toast.LENGTH_SHORT).show()
+                }, onError = {
+                    Log.e("testGif", "LastVideoError")
+                    Toast.makeText(this, "Bad LastVideoError", Toast.LENGTH_SHORT).show()
+                }
+            )
+    }
 
     private fun getCover() {
         buildNewRetrofit().create(ApiRequest::class.java).getCover().subscribeOn(
-            Schedulers.newThread()
-        )
+            Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 url = it.backgroundImage ?: ""
+                idCover = it.movieId ?: ""
             }.subscribeBy(
                 onNext = {
                     Glide.with(this)
                         .load(IMG_URL+url)
                         .into(ivMain)
                     Log.d("testGif", "Succesful")
+                    btnMainView.setOnClickListener {
+                        val intent = Intent(this, RecyclerItemScreen::class.java)
+                        intent.putExtra("FilmId", idCover)
+                        startActivity(intent)
+                    }
                 }, onError = {
                     Log.d("testGif", "onError url = $url")
                 }
@@ -108,23 +142,6 @@ class MainScreen : AppCompatActivity() {
 
         return retrofit
 
-    }
-
-    private fun getPopularMovies(movieIdUrl: String, list: MoviesList): Item {
-        return MainCardContainer(
-                ::onItemClick,
-                listOf(
-                        MovieItem(
-                                list
-                        )
-                )
-        )
-    }
-
-    fun onItemClick(url: String) {
-        Toast.makeText(this, "I", Toast.LENGTH_SHORT).show()
-        val i = Intent(this, RecyclerItemScreen::class.java)
-        startActivity(i)
     }
 
 //    private fun loadFragment(fragment: Fragment) {

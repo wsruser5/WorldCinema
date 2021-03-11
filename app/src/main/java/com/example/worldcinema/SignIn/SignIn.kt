@@ -71,6 +71,7 @@ class SignIn : AppCompatActivity() {
                     val token = response.body()?.token
                     if (token != null) {
                         val intent = Intent(this@SignIn, MainScreen::class.java)
+                        intent.putExtra("token", token)
                         startActivity(intent)
                     } else {
                         val toast = Toast.makeText(this@SignIn, "Неавторизованный доступ", Toast.LENGTH_SHORT).show()

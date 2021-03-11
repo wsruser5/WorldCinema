@@ -43,7 +43,7 @@ class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
         Log.d("testGif", myList.size.toString())
 
         holder.itemView.content.setOnClickListener {
-            val context=holder.itemView.clrow.context
+            val context=holder.itemView.content.context
             val intent = Intent( context, RecyclerItemScreen::class.java)
 
             //старт активити

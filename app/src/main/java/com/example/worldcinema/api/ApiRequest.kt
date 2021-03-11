@@ -1,5 +1,7 @@
 package com.mrz.worldcinema.api
 
+import com.example.worldcinema.data.LastVideoInfo
+import com.example.worldcinema.data.MovieInfo
 import com.example.worldcinema.data.MoviesList
 import com.example.worldcinema.data.MoviesListItem
 import com.mrz.apikotlin.api.MovieGson
@@ -30,4 +32,13 @@ interface ApiRequest {
     @GET("movies")
     fun getMovies(
         @Query("filter") filter: String): Observable<List<MoviesListItem>>
+
+    @GET("movies/{movieId}")
+    fun getFilm(
+        @Query("movieId") movieId: String): Observable<MovieInfo>
+
+    @Headers("Authorization: Bearer 265462")
+    @GET("usermovies")
+    fun getLastVideo(
+        @Query("filter") filter: String): Observable<List<LastVideoInfo>>
 }
