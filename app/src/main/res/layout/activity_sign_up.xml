@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp"
+    tools:context=".SignUp.SignUp"
     android:background="@color/colorPrim">
 
     <ImageView
@@ -18,10 +18,10 @@
 
 
     <EditText
-        android:id="@+id/etUpName"
+        android:id="@+id/etSignUpName"
         android:layout_width="343dp"
         android:layout_height="44dp"
-        android:background="@drawable/bg_et"
+        android:background="@drawable/bg_sign_et"
         android:hint="Имя"
         android:textSize="14sp"
         android:textColorHint="@color/colorBorder"
@@ -33,10 +33,10 @@
         android:inputType="textPersonName"/>
 
     <EditText
-        android:id="@+id/etUpFam"
+        android:id="@+id/etSignUpSecondName"
         android:layout_width="343dp"
         android:layout_height="44dp"
-        android:background="@drawable/bg_et"
+        android:background="@drawable/bg_sign_et"
         android:hint="Фамилия"
         android:textSize="14sp"
         android:textColorHint="@color/colorBorder"
@@ -48,10 +48,10 @@
         android:inputType="textPersonName"/>
 
     <EditText
-        android:id="@+id/etUpEmail"
+        android:id="@+id/etSignUpEmail"
         android:layout_width="343dp"
         android:layout_height="44dp"
-        android:background="@drawable/bg_et"
+        android:background="@drawable/bg_sign_et"
         android:hint="E-mail"
         android:textSize="14sp"
         android:textColorHint="@color/colorBorder"
@@ -63,11 +63,11 @@
         android:inputType="textEmailAddress"/>
 
     <EditText
-        android:id="@+id/etUpPass"
+        android:id="@+id/etSignUpPassword"
         android:layout_width="343dp"
         android:textSize="14sp"
         android:layout_height="44dp"
-        android:background="@drawable/bg_et"
+        android:background="@drawable/bg_sign_et"
         android:hint="Пароль"
         android:textColorHint="@color/colorBorder"
         android:paddingStart="16dp"
@@ -78,11 +78,11 @@
         android:inputType="textPassword"/>
 
     <EditText
-        android:id="@+id/etUpPassAgg"
+        android:id="@+id/etSignUpPasswordRepeat"
         android:layout_width="343dp"
         android:textSize="14sp"
         android:layout_height="44dp"
-        android:background="@drawable/bg_et"
+        android:background="@drawable/bg_sign_et"
         android:hint="Повторите пароль"
         android:textColorHint="@color/colorBorder"
         android:paddingStart="16dp"
@@ -96,10 +96,10 @@
 
 
     <Button
-        android:id="@+id/btnUplogin"
+        android:id="@+id/btSignUpLogIn"
         android:layout_width="343dp"
         android:layout_height="44dp"
-        android:background="@drawable/bg_btn"
+        android:background="@drawable/bg_btn_sign"
         android:text="Зарегистрироваться"
         android:textSize="14sp"
         android:textColor="@color/white"
@@ -108,10 +108,10 @@
         android:layout_marginTop="586dp"/>
 
     <Button
-        android:id="@+id/btnUpReg"
+        android:id="@+id/btSignUpHaveAccount"
         android:layout_width="343dp"
         android:layout_height="44dp"
-        android:background="@drawable/bg_et"
+        android:background="@drawable/bg_sign_et"
         android:text="У меня уже есть аккаунт"
         android:textSize="14sp"
         android:textColor="@color/colorAcc"

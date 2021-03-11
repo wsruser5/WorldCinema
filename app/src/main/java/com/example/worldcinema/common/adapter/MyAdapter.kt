@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.worldcinema.R
-import com.mrz.apiwork.model.Post
+import com.example.worldcinema.data.Post
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_layout.view.*
 

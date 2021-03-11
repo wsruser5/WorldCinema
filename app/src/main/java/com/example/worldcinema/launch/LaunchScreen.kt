@@ -1,10 +1,13 @@
-package com.example.worldcinema
+package com.example.worldcinema.launch
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.worldcinema.R
+import com.example.worldcinema.SignIn.SignIn
+import com.example.worldcinema.SignUp.SignUp
 
 class LaunchScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

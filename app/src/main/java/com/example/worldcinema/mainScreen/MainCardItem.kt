@@ -1,5 +1,6 @@
-package com.example.worldcinema
+package com.example.worldcinema.mainScreen
 
+import com.example.worldcinema.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item

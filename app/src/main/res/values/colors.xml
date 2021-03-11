@@ -10,4 +10,5 @@
     <color name="colorPrim">#332973</color>
     <color name="colorBorder">#A8A8A8</color>
     <color name="colorAcc">#EF3A01</color>
+    <color name="hintColor">#AFAFAF</color>
 </resources>
