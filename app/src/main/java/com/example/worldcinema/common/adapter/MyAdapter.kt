@@ -1,47 +1,57 @@
 package com.example.worldcinema.common.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.worldcinema.R
+import com.example.worldcinema.data.MoviesList
+import com.example.worldcinema.data.MoviesListItem
 import com.example.worldcinema.data.Post
+import com.example.worldcinema.mainScreen.RecyclerItemScreen
+import com.mrz.worldcinema.constants.Constants
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main_screen.*
+import kotlinx.android.synthetic.main.item_with_text.view.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 
 class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-    //Список всех элементов
-    private var myList = emptyList<Post>()
+    private var myList = emptyList<MoviesListItem>()
 
-    // Нада, но внутрянку можешь удалить, по клику на элемент вызывает тост
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
-//    создает новый объект ViewHolder всякий раз, когда RecyclerView нуждается в этом.
-//    Это тот момент, когда создаётся layout строки списка, передается объекту ViewHolder, и каждый дочерний view-компонент может быть найден и сохранен.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_layout, parent, false))
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_with_text, parent, false))
     }
 
-    // Количество элементов
     override fun getItemCount(): Int {
         return myList.size
     }
 
-    //Заполнение списка и считывание кликов
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        //По нажатию на clrow (самому элементу списка), выполняется действие
-        holder.itemView.clrow.setOnClickListener {
+        Glide.with(holder.itemView)
+            .load(Constants.IMG_URL + myList[position].poster)
+            .into(holder.itemView.image_preview)
+        Log.d("testGif", myList.size.toString())
 
+        holder.itemView.content.setOnClickListener {
+            val context=holder.itemView.clrow.context
+            val intent = Intent( context, RecyclerItemScreen::class.java)
+
+            //старт активити
+            context.startActivity(intent)
         }
     }
 
-    fun setData(newList: List<Post>) {
+    fun setData(newList: List<MoviesListItem>) {
         myList = newList
         notifyDataSetChanged()
     }

@@ -28,5 +28,6 @@ interface ApiRequest {
     fun getCover(): Observable<MovieGson>
 
     @GET("movies")
-    fun getMovies(): Observable<MoviesListItem>
+    fun getMovies(
+        @Query("filter") filter: String): Observable<List<MoviesListItem>>
 }

@@ -1,3 +1,5 @@
 package com.example.worldcinema.data
 
-class MoviesList : ArrayList<MoviesListItem>()
+class MoviesList: ArrayList<MoviesListItem>() {
+
+}

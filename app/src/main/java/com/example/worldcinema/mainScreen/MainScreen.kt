@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.worldcinema.*
 import com.example.worldcinema.common.adapter.MyAdapter
@@ -30,52 +31,44 @@ class MainScreen : AppCompatActivity() {
 
     private val myAdapter by lazy { MyAdapter() }
     private var url: String = ""
-    private lateinit var age: String
-    private lateinit var description: String
-    private lateinit var images: List<Any>
-    private lateinit var movieId: String
-    private lateinit var name: String
-    private lateinit var poster: String
-    private lateinit var tags: List<Any>
+    private lateinit var films: List<MoviesListItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
-        val movies = listOf(
-            getPopularMovies("poster.jpg")
-        )
+//        val movies = listOf(
+//            getPopularMovies("poster.jpg")
+//        )
+        items_container.adapter = myAdapter
+        items_container.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
+
         getMovies()
-
-
 
         getCover()
     }
 
     private fun getMovies() {
-        buildNewRetrofit().create(ApiRequest::class.java).getMovies().subscribeOn(
+        buildNewRetrofit().create(ApiRequest::class.java).getMovies("new").subscribeOn(
             Schedulers.newThread()
         )
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-                age = it.age ?: ""
-                description = it.description ?: ""
-                images = it.images
-                movieId = it.movieId ?: ""
-                name= it.name ?: ""
-                poster = it.poster
-                tags = it.tags
-
+                films = it
             }.subscribeBy(
                 onNext = {
-                    val movies = listOf(
-                        getPopularMovies(poster)
-                    )
-                    items_container.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(movies) }
-                    Log.d("testGif", "Succesful Movies")
+                    val movies = films
+
+                    movies.let{
+                        myAdapter.setData(it)
+                    }
+//                    items_container.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(movies(poster))
+                    Log.d("testGif", movies.toString())
                     Toast.makeText(this, "Good", Toast.LENGTH_SHORT).show()
+
+
                 }, onError = {
-                    Log.d("testGif", "onError url = $url")
+                    Log.e("testGif", "onError url = $films")
                     Toast.makeText(this, "Bad Movies", Toast.LENGTH_SHORT).show()
                 }
             )
@@ -117,34 +110,12 @@ class MainScreen : AppCompatActivity() {
 
     }
 
-    private fun getPopularMovies(movieIdUrl: String): Item {
+    private fun getPopularMovies(movieIdUrl: String, list: MoviesList): Item {
         return MainCardContainer(
                 ::onItemClick,
                 listOf(
                         MovieItem(
-                                MovieContent(
-                                        IMG_URL+movieIdUrl
-                                )
-                        ),
-                        MovieItem(
-                                MovieContent(
-                                        IMG_URL+movieIdUrl
-                                )
-                        ),
-                        MovieItem(
-                                MovieContent(
-                                        IMG_URL+movieIdUrl
-                                )
-                        ),
-                        MovieItem(
-                                MovieContent(
-                                        IMG_URL+movieIdUrl
-                                )
-                        ),
-                        MovieItem(
-                                MovieContent(
-                                    IMG_URL+ movieIdUrl
-                                )
+                                list
                         )
                 )
         )
