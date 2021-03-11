@@ -25,7 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:src="@drawable/imgav"
-                    android:scaleType="center" />
+                    android:scaleType="centerCrop" />
 
                 <Button
                     android:id="@+id/btnMainView"
@@ -40,22 +40,115 @@
 
             </FrameLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                xmlns:tools="http://schemas.android.com/tools"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:id="@+id/category_container"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="8dp"
-                android:background="#14c4c4c4"/>
+                android:background="#14c4c4c4"
+                android:layout_marginTop="8dp">
+
+                <FrameLayout
+                    android:layout_width="121dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvTrends"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="В тренде"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="17sp"
+                        android:layout_marginRight="16dp"
+                        android:textColor="@color/colorAcc"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="26dp"/>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/colorAcc"
+                        android:layout_gravity="bottom"/>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Новое"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorAcc"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="63dp"/>
+
+                <TextView
+                    android:id="@+id/tvForYou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Для Вас"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorAcc"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="93dp"/>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                xmlns:tools="http://schemas.android.com/tools"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:id="@+id/items_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#00000000"/>
+                android:background="#00000000"
+                android:elevation="0dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Вы смотрели"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="@color/colorAcc"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="17dp"
+                android:layout_marginLeft="16dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivMainLastVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/last_video"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivMainPlayBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/play"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvMainLastVideoName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Altered Carbon"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="16dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

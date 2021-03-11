@@ -10,7 +10,7 @@
     tools:ignore="RtlHardcoded">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/colorPrim"
         app:cardBackgroundColor="@color/colorPrim">

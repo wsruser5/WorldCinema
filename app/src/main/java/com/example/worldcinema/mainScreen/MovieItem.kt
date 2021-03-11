@@ -13,25 +13,11 @@ class MovieItem(private val content: MovieContent) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         Picasso.get()
-            .load(content.url)
+            .load(content.urlImg)
             .into(viewHolder.image_preview)
     }
 }
 
-class MovieTitle(private val content: CategoryTitle) : Item() {
-
-    override fun getLayout() = R.layout.row_layout
-
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.tvrow.text = content.categoryName
-    }
-}
-
-
 data class MovieContent(
-    val url: String
-)
-
-data class CategoryTitle(
-    val categoryName: String
+    val urlImg: String
 )

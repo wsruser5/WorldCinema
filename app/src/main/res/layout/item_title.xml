@@ -5,6 +5,7 @@
     android:id="@+id/main_content_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorPrim"
     android:background="@color/colorPrim">
 
     <LinearLayout

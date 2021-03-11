@@ -1,5 +1,6 @@
 package com.example.worldcinema.mainScreen
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.worldcinema.*
 import com.example.worldcinema.common.adapter.MyAdapter
 import com.example.worldcinema.data.MoviesList
+import com.example.worldcinema.data.MoviesListItem
 import com.google.gson.GsonBuilder
 import com.mrz.worldcinema.api.ApiRequest
 import com.mrz.worldcinema.constants.Constants.Companion.BASE_URL
@@ -28,38 +30,48 @@ class MainScreen : AppCompatActivity() {
 
     private val myAdapter by lazy { MyAdapter() }
     private var url: String = ""
-    private lateinit var movies: ArrayList<MoviesList>
+    private lateinit var age: String
+    private lateinit var description: String
+    private lateinit var images: List<Any>
+    private lateinit var movieId: String
+    private lateinit var name: String
+    private lateinit var poster: String
+    private lateinit var tags: List<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
         val movies = listOf(
-            getPopularMovies()
+            getPopularMovies("poster.jpg")
         )
+        getMovies()
 
-        val category = listOf(
-            getCategory()
-        )
 
-        items_container.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(movies) }
-        category_container.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(category) }
 
         getCover()
     }
 
     private fun getMovies() {
-        buildNewRetrofit().create(ApiRequest::class.java).getCover().subscribeOn(
+        buildNewRetrofit().create(ApiRequest::class.java).getMovies().subscribeOn(
             Schedulers.newThread()
         )
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-                url = it.backgroundImage ?: ""
+                age = it.age ?: ""
+                description = it.description ?: ""
+                images = it.images
+                movieId = it.movieId ?: ""
+                name= it.name ?: ""
+                poster = it.poster
+                tags = it.tags
+
             }.subscribeBy(
                 onNext = {
-                    Glide.with(this)
-                        .load(IMG_URL+url)
-                        .into(ivMain)
+                    val movies = listOf(
+                        getPopularMovies(poster)
+                    )
+                    items_container.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(movies) }
                     Log.d("testGif", "Succesful Movies")
                     Toast.makeText(this, "Good", Toast.LENGTH_SHORT).show()
                 }, onError = {
@@ -83,10 +95,8 @@ class MainScreen : AppCompatActivity() {
                         .load(IMG_URL+url)
                         .into(ivMain)
                     Log.d("testGif", "Succesful")
-                    Toast.makeText(this, "Good", Toast.LENGTH_SHORT).show()
                 }, onError = {
                     Log.d("testGif", "onError url = $url")
-                    Toast.makeText(this, "Bad", Toast.LENGTH_SHORT).show()
                 }
             )
     }
@@ -107,57 +117,33 @@ class MainScreen : AppCompatActivity() {
 
     }
 
-    private fun getCategory(): Item {
-        return TitleContainer(
-                ::onItemClick,
-                listOf(
-                        MovieTitle(
-                                CategoryTitle(
-                                        "В тренде"
-                                )
-                        ),
-                        MovieTitle(
-                                CategoryTitle(
-                                        "Новое"
-                                )
-                        ),
-                        MovieTitle(
-                                CategoryTitle(
-                                        "Для Вас"
-                                )
-                        )
-                )
-        )
-
-    }
-
-    private fun getPopularMovies(): Item {
+    private fun getPopularMovies(movieIdUrl: String): Item {
         return MainCardContainer(
                 ::onItemClick,
                 listOf(
                         MovieItem(
                                 MovieContent(
-                                        IMG_URL+"30891708-1170704.jpg"
+                                        IMG_URL+movieIdUrl
                                 )
                         ),
                         MovieItem(
                                 MovieContent(
-                                        IMG_URL+"umbrella.jpeg"
+                                        IMG_URL+movieIdUrl
                                 )
                         ),
                         MovieItem(
                                 MovieContent(
-                                        IMG_URL+"30891708-1170704.jpg"
+                                        IMG_URL+movieIdUrl
                                 )
                         ),
                         MovieItem(
                                 MovieContent(
-                                        IMG_URL+"kinopoisk.ru-Memoriseuteu-3483691.jpg"
+                                        IMG_URL+movieIdUrl
                                 )
                         ),
                         MovieItem(
                                 MovieContent(
-                                        "https://upload.wikimedia.org/wikipedia/ru/8/8a/Fight_club.jpg"
+                                    IMG_URL+ movieIdUrl
                                 )
                         )
                 )
@@ -165,5 +151,16 @@ class MainScreen : AppCompatActivity() {
     }
 
     fun onItemClick(url: String) {
+        Toast.makeText(this, "I", Toast.LENGTH_SHORT).show()
+        val i = Intent(this, RecyclerItemScreen::class.java)
+        startActivity(i)
     }
+
+//    private fun loadFragment(fragment: Fragment) {
+//        // load fragment
+//        val transaction = supportFragmentManager.beginTransaction()
+//        transaction.replace(R.id.container, fragment)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
+//    }
 }
