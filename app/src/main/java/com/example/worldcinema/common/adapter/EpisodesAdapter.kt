@@ -36,7 +36,7 @@ class EpisodesAdapter: RecyclerView.Adapter<EpisodesAdapter.MyViewHolder>() {
         holder.itemView.tvDescEpisode.text = myList[position].description
 
         Glide.with(holder.itemView)
-            .load(Constants.IMG_URL + imagesList[position])
+            .load(Constants.IMG_URL + myList[0].images)
             .into(holder.itemView.ivEpisodePreview)
 
         Log.d("testGif", myList.size.toString())

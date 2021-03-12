@@ -44,21 +44,21 @@ class MainScreen : AppCompatActivity() {
 
         btnTrends.setOnClickListener {
             filter = "inTrend"
-            getMovies()
+            getMovies("inTrend")
             underForYou.visibility = View.INVISIBLE
             underNew.visibility = View.INVISIBLE
             underTrend.visibility = View.VISIBLE
         }
         btnForYou.setOnClickListener {
             filter = "forMe"
-            getMovies()
+            getMovies("forMe")
             underForYou.visibility = View.VISIBLE
             underNew.visibility = View.INVISIBLE
             underTrend.visibility = View.INVISIBLE
         }
         btnNew.setOnClickListener {
             filter = "new"
-            getMovies()
+            getMovies("new")
             underForYou.visibility = View.INVISIBLE
             underNew.visibility = View.VISIBLE
             underTrend.visibility = View.INVISIBLE
@@ -79,7 +79,7 @@ class MainScreen : AppCompatActivity() {
             underNew.visibility = View.VISIBLE
             underTrend.visibility = View.INVISIBLE
         }
-        getMovies()
+        getMovies(filter)
         items_container.adapter = myAdapter
         items_container.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
 
@@ -88,7 +88,7 @@ class MainScreen : AppCompatActivity() {
         getCover()
     }
 
-    private fun getMovies() {
+    private fun getMovies(filter: String) {
         buildNewRetrofit().create(ApiRequest::class.java).getMovies(filter).subscribeOn(
             Schedulers.newThread()
         )
@@ -102,10 +102,11 @@ class MainScreen : AppCompatActivity() {
                     movies.let{
                         myAdapter.setData(it)
                     }
+
                     Log.d("testGif", movies.toString())
                     Toast.makeText(this, "Good", Toast.LENGTH_SHORT).show()
                 }, onError = {
-                    Toast.makeText(this, "Bad Movies", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Ошибка на сервере", Toast.LENGTH_SHORT).show()
                 }
             )
     }
@@ -133,7 +134,7 @@ class MainScreen : AppCompatActivity() {
                     Toast.makeText(this, "LastVideo", Toast.LENGTH_SHORT).show()
                 }, onError = {
                     Log.e("testGif", "LastVideoError")
-                    Toast.makeText(this, "Bad LastVideoError", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Ошибка на сервере", Toast.LENGTH_SHORT).show()
                 }
             )
     }

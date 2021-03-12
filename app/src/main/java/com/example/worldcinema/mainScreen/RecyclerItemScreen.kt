@@ -83,6 +83,15 @@ class RecyclerItemScreen : AppCompatActivity() {
                 tags = it.tags
             }.subscribeBy(
                 onNext = {
+                    tags.let{
+                        tagsAdapter.setData(it)
+                    }
+                    tvFilmNameRecyclerElement.text = name
+                    textDescription.text = description
+                    Log.d("testGif", "StartFilm $cover")
+                    Glide.with(this)
+                            .load(Constants.IMG_URL + poster)
+                            .into(ivBgFilmCover)
                     if (age == "16") {
                         Glide.with(this)
                                 .load(R.drawable.sixteen)
@@ -103,15 +112,6 @@ class RecyclerItemScreen : AppCompatActivity() {
                                 .load(R.drawable.twelve)
                                 .into(icAge)
                     }
-                    tags.let{
-                        tagsAdapter.setData(it)
-                    }
-                    tvFilmNameRecyclerElement.text = name
-                    textDescription.text = description
-                    Log.d("testGif", "StartFilm $cover")
-                    Glide.with(this)
-                            .load(Constants.IMG_URL + poster)
-                            .into(ivBgFilmCover)
                 }, onError = {
                     Log.e("testGif", "ErrorFilm")
                     Toast.makeText(this, "Error Movies", Toast.LENGTH_SHORT).show()
