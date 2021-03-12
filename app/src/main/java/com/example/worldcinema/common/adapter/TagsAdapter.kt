@@ -17,18 +17,19 @@ import com.example.worldcinema.mainScreen.RecyclerItemScreen
 import com.mrz.worldcinema.constants.Constants
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main_screen.*
+import kotlinx.android.synthetic.main.item_tags.view.*
 import kotlinx.android.synthetic.main.item_with_text.view.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 
-class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class TagsAdapter: RecyclerView.Adapter<TagsAdapter.MyViewHolder>() {
 
-    private var myList = emptyList<MoviesListItem>()
+    private var myList = emptyList<String>()
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_with_text, parent, false))
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_tags, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -37,20 +38,12 @@ class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        Glide.with(holder.itemView)
-            .load(Constants.IMG_URL + myList[position].poster)
-            .into(holder.itemView.image_preview)
+        holder.itemView.tvTag.text = myList[position]
         Log.d("testGif", myList.size.toString())
 
-        holder.itemView.content.setOnClickListener {
-            val context=holder.itemView.content.context
-            val intent = Intent( context, RecyclerItemScreen::class.java)
-            //старт активити
-            context.startActivity(intent)
-        }
     }
 
-    fun setData(newList: List<MoviesListItem>) {
+    fun setData(newList: List<String>) {
         myList = newList
         notifyDataSetChanged()
     }

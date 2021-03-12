@@ -47,7 +47,10 @@
                 android:layout_marginTop="8dp">
 
                 <FrameLayout
+                    android:id="@+id/btnTrends"
                     android:layout_width="121dp"
+                    android:clickable="true"
+                    android:background="#00c4c4c4"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -61,34 +64,64 @@
                         android:textColor="@color/colorAcc"
                         android:textStyle="bold"
                         android:layout_marginLeft="26dp"/>
+
                     <FrameLayout
+                        android:id="@+id/underTrend"
                         android:layout_width="match_parent"
                         android:layout_height="5dp"
                         android:background="@color/colorAcc"
                         android:layout_gravity="bottom"/>
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/tvNew"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Новое"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="17sp"
-                    android:textColor="@color/colorAcc"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="63dp"/>
+                <FrameLayout
+                    android:id="@+id/btnNew"
+                    android:clickable="true"
+                    android:layout_width="121dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp">
 
-                <TextView
-                    android:id="@+id/tvForYou"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Для Вас"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="17sp"
-                    android:textColor="@color/colorAcc"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="93dp"/>
+                    <TextView
+                        android:id="@+id/tvNew"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Новое"
+                        android:layout_gravity="center"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorAcc"
+                        android:textStyle="bold"/>
+
+                    <FrameLayout
+                        android:id="@+id/underNew"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/colorAcc"
+                        android:layout_gravity="bottom"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/btnForYou"
+                    android:clickable="true"
+                    android:layout_width="121dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <TextView
+                        android:id="@+id/tvForYou"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Для Вас"
+                        android:layout_gravity="center"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorAcc"
+                        android:textStyle="bold"/>
+
+                    <FrameLayout
+                        android:id="@+id/underForYou"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/colorAcc"
+                        android:layout_gravity="bottom"/>
+                </FrameLayout>
 
             </LinearLayout>
 

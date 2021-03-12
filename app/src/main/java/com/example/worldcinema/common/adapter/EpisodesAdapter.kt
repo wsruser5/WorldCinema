@@ -5,30 +5,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.worldcinema.R
-import com.example.worldcinema.data.MoviesList
-import com.example.worldcinema.data.MoviesListItem
-import com.example.worldcinema.data.Post
+import com.example.worldcinema.data.EpisodesList
 import com.example.worldcinema.mainScreen.RecyclerItemScreen
 import com.mrz.worldcinema.constants.Constants
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main_screen.*
-import kotlinx.android.synthetic.main.item_with_text.view.*
-import kotlinx.android.synthetic.main.row_layout.view.*
+import kotlinx.android.synthetic.main.item_images.view.*
 
 
-class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class EpisodesAdapter: RecyclerView.Adapter<EpisodesAdapter.MyViewHolder>() {
 
-    private var myList = emptyList<MoviesListItem>()
+    private var myList = emptyList<EpisodesList>()
+    private var imagesList = emptyList<String?>()
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_with_text, parent, false))
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_images, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -37,21 +31,28 @@ class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
+        holder.itemView.tvNameEpisode.text = myList[position].name
+        holder.itemView.tvDateEpisode.text = myList[position].year
+        holder.itemView.tvDescEpisode.text = myList[position].description
+
         Glide.with(holder.itemView)
-            .load(Constants.IMG_URL + myList[position].poster)
-            .into(holder.itemView.image_preview)
+            .load(Constants.IMG_URL + imagesList[position])
+            .into(holder.itemView.ivEpisodePreview)
+
         Log.d("testGif", myList.size.toString())
 
         holder.itemView.content.setOnClickListener {
             val context=holder.itemView.content.context
             val intent = Intent( context, RecyclerItemScreen::class.java)
+
             //старт активити
             context.startActivity(intent)
         }
     }
 
-    fun setData(newList: List<MoviesListItem>) {
+    fun setData(newList: List<EpisodesList>,images: List<String>) {
         myList = newList
+        imagesList = images
         notifyDataSetChanged()
     }
 

@@ -14,16 +14,16 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".mainScreen.RecyclerItemScreen"></activity>
         <activity android:name=".mainScreen.MainScreen" >
+
+        </activity>
+        <activity android:name=".SignUp.SignUp" />
+        <activity android:name=".SignIn.SignIn" />
+        <activity android:name=".launch.LaunchScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".SignUp.SignUp" />
-        <activity android:name=".SignIn.SignIn" />
-        <activity android:name=".launch.LaunchScreen">
-
         </activity>
     </application>
 

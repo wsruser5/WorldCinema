@@ -4,20 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.worldcinema.*
 import com.example.worldcinema.common.adapter.MyAdapter
-import com.example.worldcinema.data.MoviesList
 import com.example.worldcinema.data.MoviesListItem
 import com.google.gson.GsonBuilder
 import com.mrz.worldcinema.api.ApiRequest
 import com.mrz.worldcinema.constants.Constants.Companion.BASE_URL
 import com.mrz.worldcinema.constants.Constants.Companion.IMG_URL
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import com.xwray.groupie.kotlinandroidextensions.Item
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -34,25 +31,65 @@ class MainScreen : AppCompatActivity() {
     private var urlLast: String = ""
     private var nameLast: String = ""
     private lateinit var films: List<MoviesListItem>
-    private var idCover: String = ""
+    var idCover: String = ""
     private var idLast: String = ""
+
+    private var filter: String = "forMe"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
 
-        ivMainLastVideo.setOnClickListener {  }
         val token:String = intent.getStringExtra("token").toString()
+
+        btnTrends.setOnClickListener {
+            filter = "inTrend"
+            getMovies()
+            underForYou.visibility = View.INVISIBLE
+            underNew.visibility = View.INVISIBLE
+            underTrend.visibility = View.VISIBLE
+        }
+        btnForYou.setOnClickListener {
+            filter = "forMe"
+            getMovies()
+            underForYou.visibility = View.VISIBLE
+            underNew.visibility = View.INVISIBLE
+            underTrend.visibility = View.INVISIBLE
+        }
+        btnNew.setOnClickListener {
+            filter = "new"
+            getMovies()
+            underForYou.visibility = View.INVISIBLE
+            underNew.visibility = View.VISIBLE
+            underTrend.visibility = View.INVISIBLE
+        }
+
+        if (filter == "inTrend") {
+            underForYou.visibility = View.INVISIBLE
+            underNew.visibility = View.INVISIBLE
+            underTrend.visibility = View.VISIBLE
+        }
+        if (filter == "forMe") {
+            underForYou.visibility = View.VISIBLE
+            underNew.visibility = View.INVISIBLE
+            underTrend.visibility = View.INVISIBLE
+        }
+        if (filter == "new") {
+            underForYou.visibility = View.INVISIBLE
+            underNew.visibility = View.VISIBLE
+            underTrend.visibility = View.INVISIBLE
+        }
+        getMovies()
         items_container.adapter = myAdapter
         items_container.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
 
-        getMovies()
+
         getLastVideo(token)
         getCover()
     }
 
     private fun getMovies() {
-        buildNewRetrofit().create(ApiRequest::class.java).getMovies("new").subscribeOn(
+        buildNewRetrofit().create(ApiRequest::class.java).getMovies(filter).subscribeOn(
             Schedulers.newThread()
         )
             .observeOn(AndroidSchedulers.mainThread())
@@ -67,10 +104,7 @@ class MainScreen : AppCompatActivity() {
                     }
                     Log.d("testGif", movies.toString())
                     Toast.makeText(this, "Good", Toast.LENGTH_SHORT).show()
-
-
                 }, onError = {
-                    Log.e("testGif", "onError url = $films")
                     Toast.makeText(this, "Bad Movies", Toast.LENGTH_SHORT).show()
                 }
             )
@@ -81,9 +115,9 @@ class MainScreen : AppCompatActivity() {
             Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-                urlLast = it[1].poster
-                nameLast = it[1].name
-                idLast = it[1].movieId
+                urlLast = it[0].poster
+                nameLast = it[0].name
+                idLast = it[0].movieId
             }.subscribeBy(
                 onNext = {
                     Glide.with(this)

@@ -41,8 +41,8 @@ class SignIn : AppCompatActivity() {
             }
         })
 
-        if (etSignInPassword==null) { etSignInPassword.error = "Введите пароль" }
-        if (etSignInEmail==null) { etSignInEmail.error = "Введите e-mail" }
+        if (etSignInPassword.getText().toString().equals("")) { etSignInPassword.error = "Введите пароль" }
+        if (etSignInEmail.getText().toString().equals("")) { etSignInEmail.error = "Введите e-mail" }
 
         btSignInLogIn.setOnClickListener {
             signIn()

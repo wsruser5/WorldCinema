@@ -7,5 +7,5 @@ data class MovieInfo(
     val movieId: String,
     val name: String,
     val poster: String,
-    val tags: List<Tag>
+    val tags: List<String>
 )
